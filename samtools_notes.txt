@@ -1,0 +1,17 @@
+interact -t 4:00:00 -m 64g
+module load samtools/1.3.1  
+
+samtools view -S -b Thalassiosira_antarctica_AB013_bwa_aln.sam > Thalassiosira_antarctica_AB013_bwa_aln.bam
+samtools sort Thalassiosira_antarctica_AB013_bwa_aln.bam -o Thalassiosira_antarctica_AB013_bwa_aln_sorted.bam
+samtools index Thalassiosira_antarctica_AB013_bwa_aln_sorted.bam 
+samtools idxstats Thalassiosira_antarctica_AB013_bwa_aln_sorted.bam > Thalassiosira_antarctica_AB013_bwa_aln_sorted_idxstats_out
+
+samtools view -S -b Thalassiosira_antarctica_AB014_bwa_aln.sam > Thalassiosira_antarctica_AB014_bwa_aln.bam
+samtools sort Thalassiosira_antarctica_AB014_bwa_aln.bam -o Thalassiosira_antarctica_AB014_bwa_aln_sorted.bam
+samtools index Thalassiosira_antarctica_AB014_bwa_aln_sorted.bam 
+samtools idxstats Thalassiosira_antarctica_AB014_bwa_aln_sorted.bam > Thalassiosira_antarctica_AB014_bwa_aln_sorted_idxstats_out
+
+samtools view -S -b Thalassiosira_antarctica_AB015_bwa_aln.sam > Thalassiosira_antarctica_AB015_bwa_aln.bam
+samtools sort Thalassiosira_antarctica_AB015_bwa_aln.bam -o Thalassiosira_antarctica_AB015_bwa_aln_sorted.bam
+samtools index Thalassiosira_antarctica_AB015_bwa_aln_sorted.bam 
+samtools idxstats Thalassiosira_antarctica_AB015_bwa_aln_sorted.bam > Thalassiosira_antarctica_AB015_bwa_aln_sorted_idxstats_out

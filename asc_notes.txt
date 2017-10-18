@@ -1,0 +1,112 @@
+setwd("/Users/joselynn/Dropbox/CO2_metatranscriptome/october2017_asc")
+# of genes that passed the 2tpm filtering:
+Attheya_septentionalis - 9876
+Chaetoceros_neogracile - 11005
+Skeletonema_costatum - 4303
+Skeletonema_costatum - 19331
+Skeletonema_marinoi - 37702
+Thalassiosira_antarctica - 3496
+Thalassiosira_punctigera - 2084
+Thalassiosira_miniscula - 1921
+
+########################################################################################
+labels<-read.table("Attheya_septentionalis_all_2tpm_filtered_ids.txt", header=FALSE)
+ab013<-read.table("Attheya_septentionalis_all_2tpm_filtered_ab013_cpm.txt", header=FALSE)
+ab014<-read.table("Attheya_septentionalis_all_2tpm_filtered_ab014_cpm.txt", header=FALSE)
+ab015<-read.table("Attheya_septentionalis_all_2tpm_filtered_ab015_cpm.txt", header=FALSE)
+labels<-as.matrix(as.vector(labels))
+ab013<-as.matrix(as.vector(ceiling(ab013)))
+ab014<-as.matrix(as.vector(ceiling(ab014)))
+ab015<-as.matrix(as.vector(ceiling(ab015)))
+names(ab013)<-labels
+names(ab014)<-labels
+names(ab015)<-labels
+source("/Users/Joselynn/Dropbox/ASC/asc_0.1.5.R")
+dge_ab013_ab014<-DGE(ab013,ab014)
+kf=order(-abs(dge_ab013_ab014$delta[,1]))[1:9876]
+postpD=PostProb(dge_ab013_ab014$delta[kf,],ab013[kf], ab014[kf],dge_ab013_ab014$pars,d0=2) 
+write.table(dge_ab013_ab014, "Attheya_septentionalis_all_2tpm_filtered_ab013_ab014_dge", sep="\t")
+write.table(kf, "Attheya_septentionalis_all_2tpm_filtered_ab013_ab014_kf", sep="\t")
+write.table(postpD, "Attheya_septentionalis_all_2tpm_filtered_ab013_ab014_postpD", sep="\t")
+dge_ab014_ab015<-DGE(ab014,ab015)
+kf=order(-abs(dge_ab014_ab015$delta[,1]))[1:9876]
+postpD=PostProb(dge_ab014_ab015$delta[kf,],ab014[kf], ab015[kf],dge_ab014_ab015$pars,d0=2) 
+write.table(dge_ab014_ab015, "Attheya_septentionalis_all_2tpm_filtered_ab014_ab015_dge", sep="\t")
+write.table(kf, "Attheya_septentionalis_all_2tpm_filtered_ab014_ab015_kf", sep="\t")
+write.table(postpD, "Attheya_septentionalis_all_2tpm_filtered_ab014_ab015_postpD", sep="\t")
+########################################################################################
+labels<-read.table("Chaetoceros_neogracile_all_2tpm_filtered_ids.txt", header=FALSE)
+ab013<-read.table("Chaetoceros_neogracile_all_2tpm_filtered_ab013_cpm.txt", header=FALSE)
+ab014<-read.table("Chaetoceros_neogracile_all_2tpm_filtered_ab014_cpm.txt", header=FALSE)
+ab015<-read.table("Chaetoceros_neogracile_all_2tpm_filtered_ab015_cpm.txt", header=FALSE)
+labels<-as.matrix(as.vector(labels))
+ab013<-as.matrix(as.vector(ceiling(ab013)))
+ab014<-as.matrix(as.vector(ceiling(ab014)))
+ab015<-as.matrix(as.vector(ceiling(ab015)))
+names(ab013)<-labels
+names(ab014)<-labels
+names(ab015)<-labels
+source("/Users/Joselynn/Dropbox/ASC/asc_0.1.5.R")
+dge_ab013_ab014<-DGE(ab013,ab014)
+kf=order(-abs(dge_ab013_ab014$delta[,1]))[1:11005]
+postpD=PostProb(dge_ab013_ab014$delta[kf,],ab013[kf], ab014[kf],dge_ab013_ab014$pars,d0=2) 
+write.table(dge_ab013_ab014, "Chaetoceros_neogracile_all_2tpm_filtered_ab013_ab014_dge", sep="\t")
+write.table(kf, "Chaetoceros_neogracile_all_2tpm_filtered_ab013_ab014_kf", sep="\t")
+write.table(postpD, "Chaetoceros_neogracile_all_2tpm_filtered_ab013_ab014_postpD", sep="\t")
+dge_ab014_ab015<-DGE(ab014,ab015)
+kf=order(-abs(dge_ab014_ab015$delta[,1]))[1:11005]
+postpD=PostProb(dge_ab014_ab015$delta[kf,],ab014[kf], ab015[kf],dge_ab014_ab015$pars,d0=2) 
+write.table(dge_ab014_ab015, "Chaetoceros_neogracile_all_2tpm_filtered_ab014_ab015_dge", sep="\t")
+write.table(kf, "Chaetoceros_neogracile_all_2tpm_filtered_ab014_ab015_kf", sep="\t")
+write.table(postpD, "Chaetoceros_neogracile_all_2tpm_filtered_ab014_ab015_postpD", sep="\t")
+########################################################################################
+labels<-read.table("Skeletonema_costatum_all_2tpm_filtered_ids.txt", header=FALSE)
+ab013<-read.table("Skeletonema_costatum_all_2tpm_filtered_ab013_cpm.txt", header=FALSE)
+ab014<-read.table("Skeletonema_costatum_all_2tpm_filtered_ab014_cpm.txt", header=FALSE)
+ab015<-read.table("Skeletonema_costatum_all_2tpm_filtered_ab015_cpm.txt", header=FALSE)
+labels<-as.matrix(as.vector(labels))
+ab013<-as.matrix(as.vector(ceiling(ab013)))
+ab014<-as.matrix(as.vector(ceiling(ab014)))
+ab015<-as.matrix(as.vector(ceiling(ab015)))
+names(ab013)<-labels
+names(ab014)<-labels
+names(ab015)<-labels
+source("/Users/Joselynn/Dropbox/ASC/asc_0.1.5.R")
+dge_ab013_ab014<-DGE(ab013,ab014)
+kf=order(-abs(dge_ab013_ab014$delta[,1]))[1:4303]
+postpD=PostProb(dge_ab013_ab014$delta[kf,],ab013[kf], ab014[kf],dge_ab013_ab014$pars,d0=2) 
+write.table(dge_ab013_ab014, "Skeletonema_costatum_all_2tpm_filtered_ab013_ab014_dge", sep="\t")
+write.table(kf, "Skeletonema_costatum_all_2tpm_filtered_ab013_ab014_kf", sep="\t")
+write.table(postpD, "Skeletonema_costatum_all_2tpm_filtered_ab013_ab014_postpD", sep="\t")
+dge_ab014_ab015<-DGE(ab014,ab015)
+kf=order(-abs(dge_ab014_ab015$delta[,1]))[1:4303]
+postpD=PostProb(dge_ab014_ab015$delta[kf,],ab014[kf], ab015[kf],dge_ab014_ab015$pars,d0=2) 
+write.table(dge_ab014_ab015, "Skeletonema_costatum_all_2tpm_filtered_ab014_ab015_dge", sep="\t")
+write.table(kf, "Skeletonema_costatum_all_2tpm_filtered_ab014_ab015_kf", sep="\t")
+write.table(postpD, "Skeletonema_costatum_all_2tpm_filtered_ab014_ab015_postpD", sep="\t")
+########################################################################################
+labels<-read.table("Skeletonema_costatum_all_2tpm_filtered_ids.txt", header=FALSE)
+ab013<-read.table("Skeletonema_costatum_all_2tpm_filtered_ab013_cpm.txt", header=FALSE)
+ab014<-read.table("Skeletonema_costatum_all_2tpm_filtered_ab014_cpm.txt", header=FALSE)
+ab015<-read.table("Skeletonema_costatum_all_2tpm_filtered_ab015_cpm.txt", header=FALSE)
+labels<-as.matrix(as.vector(labels))
+ab013<-as.matrix(as.vector(ceiling(ab013)))
+ab014<-as.matrix(as.vector(ceiling(ab014)))
+ab015<-as.matrix(as.vector(ceiling(ab015)))
+names(ab013)<-labels
+names(ab014)<-labels
+names(ab015)<-labels
+source("/Users/Joselynn/Dropbox/ASC/asc_0.1.5.R")
+dge_ab013_ab014<-DGE(ab013,ab014)
+kf=order(-abs(dge_ab013_ab014$delta[,1]))[1:11005]
+postpD=PostProb(dge_ab013_ab014$delta[kf,],ab013[kf], ab014[kf],dge_ab013_ab014$pars,d0=2) 
+write.table(dge_ab013_ab014, "Skeletonema_costatum_all_2tpm_filtered_ab013_ab014_dge", sep="\t")
+write.table(kf, "Skeletonema_costatum_all_2tpm_filtered_ab013_ab014_kf", sep="\t")
+write.table(postpD, "Skeletonema_costatum_all_2tpm_filtered_ab013_ab014_postpD", sep="\t")
+dge_ab014_ab015<-DGE(ab014,ab015)
+kf=order(-abs(dge_ab014_ab015$delta[,1]))[1:11005]
+postpD=PostProb(dge_ab014_ab015$delta[kf,],ab014[kf], ab015[kf],dge_ab014_ab015$pars,d0=2) 
+write.table(dge_ab014_ab015, "Skeletonema_costatum_all_2tpm_filtered_ab014_ab015_dge", sep="\t")
+write.table(kf, "Skeletonema_costatum_all_2tpm_filtered_ab014_ab015_kf", sep="\t")
+write.table(postpD, "Skeletonema_costatum_all_2tpm_filtered_ab014_ab015_postpD", sep="\t")
+########################################################################################

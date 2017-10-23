@@ -1,0 +1,1 @@
+wget -O EJK71954.txt "https://www.ebi.ac.uk/ena/data/view/EJK71954&display=fasta"

@@ -7,25 +7,43 @@ Created on Sat Oct 14 18:22:48 2017
 """
 
 import pandas as pd
-
+#import table
 Attheya_septentionalis_ab013=pd.read_table('Attheya_septentionalis_ab013.txt', sep='\t', low_memory=False)
+#name the columns
 Attheya_septentionalis_ab013.columns=['Name','Length_ab013','EffectiveLength_ab013','TPM_ab013','NumReads_ab013','NumReads_sum_ab013','NumReads_sum_per_million_ab013','NumReads_per_million_ab013']
+#import table
 Attheya_septentionalis_ab014=pd.read_table('Attheya_septentionalis_ab014.txt', sep='\t', low_memory=False)
+#name the columns
 Attheya_septentionalis_ab014.columns=['Name','Length_ab014','EffectiveLength_ab014','TPM_ab014','NumReads_ab014','NumReads_sum_ab014','NumReads_sum_per_million_ab014','NumReads_per_million_ab014']
+#import table
 Attheya_septentionalis_ab015=pd.read_table('Attheya_septentionalis_ab015.txt', sep='\t', low_memory=False)
+#name the columns
 Attheya_septentionalis_ab015.columns=['Name','Length_ab015','EffectiveLength_ab015','TPM_ab015','NumReads_ab015','NumReads_sum_ab015','NumReads_sum_per_million_ab015','NumReads_per_million_ab015']
+
+#merge the dataframes based on the gene name
 Attheya_septentionalis_ab013_ab014=Attheya_septentionalis_ab013.merge(Attheya_septentionalis_ab014, how='inner', on='Name')
+#merge the dataframes based on the gene name again
 Attheya_septentionalis_all=Attheya_septentionalis_ab013_ab014.merge(Attheya_septentionalis_ab015, how='inner', on='Name')
+
+#filter dataframes so that only genes with greater then 2 TPM in any condition are included
 Attheya_septentionalis_all_2tpm_filtered=Attheya_septentionalis_all[(Attheya_septentionalis_all['TPM_ab013']>=2)|(Attheya_septentionalis_all['TPM_ab014']>=2)|(Attheya_septentionalis_all['TPM_ab015']>=2)]
+
+#print the merged and filtered dataframe to a file
 Attheya_septentionalis_all_2tpm_filtered.to_csv('Attheya_septentionalis_2tpm_filtered.txt', sep='\t', index=False)
+
+#print just the "Name" column to a file
 Attheya_septentionalis_all_2tpm_filtered_ids=Attheya_septentionalis_all_2tpm_filtered.loc[:,'Name']
 Attheya_septentionalis_all_2tpm_filtered_ids.to_csv('Attheya_septentionalis_all_2tpm_filtered_ids.txt', sep='\t', index=False)
+#print just the "NumReads_per_million_ab013" column to a file
 Attheya_septentionalis_all_2tpm_filtered_ab013_cpm=Attheya_septentionalis_all_2tpm_filtered.loc[:,'NumReads_per_million_ab013']
 Attheya_septentionalis_all_2tpm_filtered_ab013_cpm.to_csv('Attheya_septentionalis_all_2tpm_filtered_ab013_cpm.txt', sep='\t', index=False)
+#print just the "NumReads_per_million_ab014" column to a file
 Attheya_septentionalis_all_2tpm_filtered_ab014_cpm=Attheya_septentionalis_all_2tpm_filtered.loc[:,'NumReads_per_million_ab014']
 Attheya_septentionalis_all_2tpm_filtered_ab014_cpm.to_csv('Attheya_septentionalis_all_2tpm_filtered_ab014_cpm.txt', sep='\t', index=False)
+#print just the "NumReads_per_million_ab014" column to a file
 Attheya_septentionalis_all_2tpm_filtered_ab015_cpm=Attheya_septentionalis_all_2tpm_filtered.loc[:,'NumReads_per_million_ab015']
 Attheya_septentionalis_all_2tpm_filtered_ab015_cpm.to_csv('Attheya_septentionalis_all_2tpm_filtered_ab015_cpm.txt', sep='\t', index=False)
+#print each column to a file because ASC will only accept data vector as input.
 ##########################################################################################
 Chaetoceros_neogracile_ab013=pd.read_table('Chaetoceros_neogracile_ab013.txt', sep='\t', low_memory=False)
 Chaetoceros_neogracile_ab013.columns=['Name','Length_ab013','EffectiveLength_ab013','TPM_ab013','NumReads_ab013','NumReads_sum_ab013','NumReads_sum_per_million_ab013','NumReads_per_million_ab013']

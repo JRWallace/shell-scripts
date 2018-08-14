@@ -117,6 +117,70 @@ samtools sort metatranscriptome_diamond_hits_pe_AB013_T60.bam -o metatranscripto
 samtools index metatranscriptome_diamond_hits_pe_AB013_sorted.bam
 samtools idxstats metatranscriptome_diamond_hits_pe_AB013_sorted.bam > metatranscriptome_diamond_hits_pe_AB013_sorted_idxstats_out.txt
 ```
+## A few comments about normalizing the metatranscriptome data
+#### For the differential expression analysis I use unnormalized raw counts data, but feed each species in separately -- although the relative abundances of the species might change in the different incubation conditions, this is essentially equivalent to having different library sizes and ASC should handle those differences without issue.
+#### This normalization step will help w/ visualizing & comparing the different species but to my knowledge, normalized counts should not be used for differential expression analysis.
+#### Here's now I normalize:
+#### load pandas
+```
+import pandas as pd
+```
+
+#### load your datafiles, they should have the per-gene counts information ('NumReads') for each library
+```
+Skeletonema_costatum_AB013=pd.read_table('/Users/joselynn/mmetsp_files/Jan2018_salmon_quants/Skeletonema_costatum_camnt_salmon_quant_AB013_quant.sf', sep='\t')
+Skeletonema_costatum_AB014=pd.read_table('/Users/joselynn/mmetsp_files/Jan2018_salmon_quants/Skeletonema_costatum_camnt_salmon_quant_AB014_quant.sf', sep='\t')
+Skeletonema_costatum_AB015=pd.read_table('/Users/joselynn/mmetsp_files/Jan2018_salmon_quants/Skeletonema_costatum_camnt_salmon_quant_AB015_quant.sf', sep='\t')
+```
+#### sum read counts & add to a new column
+```
+Skeletonema_costatum_AB013['NumReads_sum']=Skeletonema_costatum_AB013['NumReads'].sum()
+```
+#### convert reads to reads per million
+```
+Skeletonema_costatum_AB013['NumReads_sum_per_million']=Skeletonema_costatum_AB013['NumReads_sum']/1000000
+```
+#### divide the reads by the reads per million 
+```
+Skeletonema_costatum_AB013['NumReads_per_million']=Skeletonema_costatum_AB013['NumReads']/Skeletonema_costatum_AB013['NumReads_sum_per_million']
+```
+#### sum read counts & add to a new column
+```
+Skeletonema_costatum_AB014['NumReads_sum']=Skeletonema_costatum_AB014['NumReads'].sum()
+```
+#### convert reads to reads per million
+```
+Skeletonema_costatum_AB014['NumReads_sum_per_million']=Skeletonema_costatum_AB014['NumReads_sum']/1000000
+```
+#### divide the reads by the reads per million 
+```
+Skeletonema_costatum_AB014['NumReads_per_million']=Skeletonema_costatum_AB014['NumReads']/Skeletonema_costatum_AB014['NumReads_sum_per_million']
+```
+#### sum read counts & add to a new column
+```
+Skeletonema_costatum_AB015['NumReads_sum']=Skeletonema_costatum_AB015['NumReads'].sum()
+```
+#### convert reads to reads per million
+```
+Skeletonema_costatum_AB015['NumReads_sum_per_million']=Skeletonema_costatum_AB015['NumReads_sum']/1000000
+```
+#### divide the reads by the reads per million 
+```
+Skeletonema_costatum_AB015['NumReads_per_million']=Skeletonema_costatum_AB015['NumReads']/Skeletonema_costatum_AB015['NumReads_sum_per_million']
+```
+#### round the dataframes
+```
+Skeletonema_costatum_AB013=Skeletonema_costatum_AB013.round(decimals=0)
+Skeletonema_costatum_AB014=Skeletonema_costatum_AB014.round(decimals=0)
+Skeletonema_costatum_AB015=Skeletonema_costatum_AB015.round(decimals=0)
+```
+#### print the outputs
+```
+Skeletonema_costatum_AB013.to_csv('/Users/joselynn/mmetsp_files/Jan2018_salmon_quants/Skeletonema_costatum_AB013.txt', sep='\t', index=False)
+Skeletonema_costatum_AB014.to_csv('/Users/joselynn/mmetsp_files/Jan2018_salmon_quants/Skeletonema_costatum_AB014.txt', sep='\t', index=False)
+Skeletonema_costatum_AB015.to_csv('/Users/joselynn/mmetsp_files/Jan2018_salmon_quants/Skeletonema_costatum_AB015.txt', sep='\t', index=False)
+```
+
 ## ASC notes
 #### 1.) Print the transcript IDs and the counts values for each condition into their own separate 1-column text files
 #### 2.) Import them into R
